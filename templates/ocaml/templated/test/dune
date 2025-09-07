@@ -1,6 +1,6 @@
 (library
- (name test_templated_app)
- (libraries base stdio templated_app)
+ (name test_templated)
+ (libraries base stdio templated)
  (inline_tests)
  (preprocess
   (pps ppx_inline_test ppx_assert ppx_expect))

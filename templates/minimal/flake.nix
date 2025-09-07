@@ -16,18 +16,18 @@
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
       in {
-        templated_app = pkgs.stdenv.mkDerivation {
-          pname = "templated_app";
+        templated = pkgs.stdenv.mkDerivation {
+          pname = "templated";
           version = "0.1.0";
           src = ./.;
           installPhase = ''
             mkdir -p $out/bin
-            echo '#!/bin/sh' > $out/bin/templated_app
-            echo 'echo "Hello from templated_app!"' >> $out/bin/templated_app
-            chmod +x $out/bin/templated_app
+            echo '#!/bin/sh' > $out/bin/templated
+            echo 'echo "Hello from templated!"' >> $out/bin/templated
+            chmod +x $out/bin/templated
           '';
         };
-        default = self.packages.${system}.templated_app;
+        default = self.packages.${system}.templated;
       }
     );
 

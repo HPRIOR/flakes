@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "templated_app"
+name = "templated"
 version = "0.1.0"

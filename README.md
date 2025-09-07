@@ -13,7 +13,7 @@ bash <(curl -s https://raw.githubusercontent.com/HPRIOR/flakes/main/init.sh) <ap
 This will:
 1. Present a menu to select a template (rust or minimal)
 2. Initialize the selected template in the current directory
-3. Replace all instances of 'templated_app' with your app name
+3. Replace all instances of 'templated' with your app name
 4. Initialize a git repository (if needed)
 5. Enable direnv for automatic environment activation
 

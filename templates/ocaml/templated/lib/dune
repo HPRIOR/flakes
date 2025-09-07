@@ -1,5 +1,5 @@
 (library
- (name templated_app)
+ (name templated)
  (flags ()) 
  (libraries 
    base 

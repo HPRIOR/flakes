@@ -1,6 +1,6 @@
 (lang dune 3.18)
 
-(name templated_app)
+(name templated)
 
 (generate_opam_files true)
 
@@ -22,7 +22,7 @@
 
 
 (package
- (name templated_app)
+ (name templated)
  (synopsis "A short synopsis")
  (description "A longer description")
  (depends 

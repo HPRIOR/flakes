@@ -1,5 +1,5 @@
 {
-  description = "templated_app";
+  description = "templated";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -24,13 +24,13 @@
     flake-utils,
     ...
   }: let
-    pname = "templated_app";
+    pname = "templated";
     ocamlVersion = "5.2.1";
   in
     flake-utils.lib.eachDefaultSystem (system:
       with opam-nix.lib.${system}; let
         pkgs = nixpkgs.legacyPackages.${system};
-        drv = buildDuneProject {} pname ./templated_app {
+        drv = buildDuneProject {} pname ./templated {
           ocaml-base-compiler = ocamlVersion;
           dune = "*"; # ensure dune is present
           utop = "*"; # REPL (optional)

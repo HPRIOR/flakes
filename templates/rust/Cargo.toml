@@ -1,10 +1,10 @@
 [package]
-name = "templated_app"
+name = "templated"
 version = "0.1.0"
 edition = "2024"
 
 [[bin]]
-name = "templated_app"
+name = "templated"
 path = "src/main.rs"
 
 [lib]

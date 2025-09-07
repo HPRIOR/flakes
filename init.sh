@@ -98,12 +98,12 @@ fi
 
 print_color "$GREEN" "✓ Template initialized"
 
-# Replace all instances of 'templated_app' with the app name
-print_color "$BLUE" "Replacing 'templated_app' with '$APP_NAME'..."
+# Replace all instances of 'templated' with the app name
+print_color "$BLUE" "Replacing 'templated' with '$APP_NAME'..."
 
 # Function to replace in files
 replace_in_files() {
-    # Find all text files and replace templated_app
+    # Find all text files and replace templated
     find . -type f \( \
         -name "*.nix" -o \
         -name "*.toml" -o \
@@ -115,9 +115,9 @@ replace_in_files() {
         -name "*.yml" -o \
         -name "*.json" \
     \) -not -path "./.git/*" -not -path "./target/*" 2>/dev/null | while IFS= read -r file; do
-        if grep -q "templated_app" "$file" 2>/dev/null; then
+        if grep -q "templated" "$file" 2>/dev/null; then
             # Use sed with different delimiter to avoid issues with slashes in paths
-            sed -i.bak "s|templated_app|$APP_NAME|g" "$file" && rm -f "$file.bak"
+            sed -i.bak "s|templated|$APP_NAME|g" "$file" && rm -f "$file.bak"
             print_color "$GREEN" "  ✓ Updated: $file"
         fi
     done
@@ -125,14 +125,14 @@ replace_in_files() {
 
 replace_in_files
 
-# Rename files and directories containing 'templated_app'
+# Rename files and directories containing 'templated'
 print_color "$BLUE" "Renaming files and directories..."
 
 # Function to rename files and directories
 rename_items() {
     # First rename files
-    find . -type f -name "*templated_app*" -not -path "./.git/*" 2>/dev/null | while IFS= read -r file; do
-        newname=$(echo "$file" | sed "s|templated_app|$APP_NAME|g")
+    find . -type f -name "*templated*" -not -path "./.git/*" 2>/dev/null | while IFS= read -r file; do
+        newname=$(echo "$file" | sed "s|templated|$APP_NAME|g")
         if [ "$file" != "$newname" ]; then
             mv "$file" "$newname"
             print_color "$GREEN" "  ✓ Renamed: $file -> $newname"
@@ -140,8 +140,8 @@ rename_items() {
     done
     
     # Then rename directories (bottom-up to avoid issues with nested dirs)
-    find . -type d -name "*templated_app*" -not -path "./.git/*" 2>/dev/null | sort -r | while IFS= read -r dir; do
-        newname=$(echo "$dir" | sed "s|templated_app|$APP_NAME|g")
+    find . -type d -name "*templated*" -not -path "./.git/*" 2>/dev/null | sort -r | while IFS= read -r dir; do
+        newname=$(echo "$dir" | sed "s|templated|$APP_NAME|g")
         if [ "$dir" != "$newname" ] && [ -d "$dir" ]; then
             mv "$dir" "$newname"
             print_color "$GREEN" "  ✓ Renamed: $dir -> $newname"
