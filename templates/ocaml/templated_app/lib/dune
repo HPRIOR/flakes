@@ -1,0 +1,6 @@
+(library
+ (name templated_app)
+ (flags ()) 
+ (libraries 
+   base 
+   core))

@@ -1,0 +1,6 @@
+(executable
+ (public_name templated_app)
+ (name main)
+ (libraries templated_app core )
+ )
+  

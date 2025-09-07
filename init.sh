@@ -27,6 +27,7 @@ if [ $# -eq 0 ]; then
 fi
 
 APP_NAME="$1"
+TEMPLATE="$2"
 
 # Validate app name (alphanumeric, underscore, and hyphen only)
 if ! echo "$APP_NAME" | grep -qE '^[a-zA-Z0-9_-]+$'; then
@@ -48,28 +49,41 @@ if [ "$(ls -A 2>/dev/null | grep -v '^\.git$' | wc -l)" -gt 0 ]; then
     fi
 fi
 
-# Present template options
-print_color "$BLUE" "Available templates:"
-echo "1) rust     - Rust development environment with cargo and toolchain"
-echo "2) minimal  - Minimal flake with just nixpkgs"
-echo
-printf "Select a template (1-2): "
-read -r choice
+# Handle template selection - check if provided as argument
+if [ -n "$TEMPLATE" ]; then
+    # Template provided as argument - validate it
+    case $TEMPLATE in
+        rust|minimal)
+            print_color "$GREEN" "Using template: $TEMPLATE"
+            ;;
+        *)
+            error_exit "Invalid template '$TEMPLATE'. Valid options are: rust, minimal"
+            ;;
+    esac
+else
+    # No template provided - interactive selection
+    print_color "$BLUE" "Available templates:"
+    echo "1) rust     - Rust development environment with cargo and toolchain"
+    echo "2) minimal  - Minimal flake with just nixpkgs"
+    echo
+    printf "Select a template (1-2): "
+    read -r choice
 
-# Map choice to template name
-case $choice in
-    1)
-        TEMPLATE="rust"
-        print_color "$GREEN" "Selected: Rust template"
-        ;;
-    2)
-        TEMPLATE="minimal"
-        print_color "$GREEN" "Selected: Minimal template"
-        ;;
-    *)
-        error_exit "Invalid selection. Please choose 1 or 2."
-        ;;
-esac
+    # Map choice to template name
+    case $choice in
+        1)
+            TEMPLATE="rust"
+            print_color "$GREEN" "Selected: Rust template"
+            ;;
+        2)
+            TEMPLATE="minimal"
+            print_color "$GREEN" "Selected: Minimal template"
+            ;;
+        *)
+            error_exit "Invalid selection. Please choose 1 or 2."
+            ;;
+    esac
+fi
 
 echo
 

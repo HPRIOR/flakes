@@ -1,0 +1,35 @@
+(lang dune 3.18)
+
+(name templated_app)
+
+(generate_opam_files true)
+
+(source
+ (github priorhar/todo))
+
+(authors "")
+
+(maintainers "")
+
+(license LICENSE)
+
+; required for 'nix build .' to work
+; provides 'watermarking'?
+; should be fixed in dune 3.19
+(subst disabled)
+
+(documentation https://url/to/documentation)
+
+
+(package
+ (name templated_app)
+ (synopsis "A short synopsis")
+ (description "A longer description")
+ (depends 
+   ocaml 
+   base 
+   core)
+ (tags
+  ("add topics" "to describe" your project)))
+
+; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
