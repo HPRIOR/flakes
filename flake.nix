@@ -21,6 +21,21 @@
         path = ./templates/minimal;
         description = "Minimal flake with just nixpkgs";
       };
+
+      ocaml = {
+        path = ./templates/ocaml;
+        description = "OCaml development environment with dune and toolchain";
+        welcomeText = ''
+          # OCaml Development Environment
+
+          ## Getting started
+          ```bash
+          direnv allow
+          dune build --root templated
+          dune exec --root templated ./templated.exe
+          ```
+        '';
+      };
     };
   };
 }
